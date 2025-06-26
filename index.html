@@ -93,7 +93,8 @@
 </head>
 <body>
 
-  <h3>July 1st - Present</h3>
+ <h3 id="date-range"></h3>
+
   <div class="money" id="raised">$0</div>
 
   <div class="bar-container">
@@ -181,5 +182,15 @@
     }
     drawParticles();
   </script>
+
+  <script>
+  const startDate = "July 1st";
+  const now = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const currentDate = now.toLocaleDateString(undefined, options);
+
+  document.getElementById('date-range').textContent = `${startDate} - ${currentDate}`;
+</script>
+
 </body>
 </html>
