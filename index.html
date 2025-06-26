@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Million Dollar Baby</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      background: radial-gradient(circle at center, #0f0f0f, #000);
+      color: #fff;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 10px #00c853;
+    }
+
+    .money {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #00e676;
+      text-shadow: 0 0 20px #00e676aa;
+    }
+
+    .tagline {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #aaa;
+      letter-spacing: 1px;
+    }
+
+    .bar-container {
+      margin-top: 2.5rem;
+      width: 90%;
+      max-width: 600px;
+      height: 20px;
+      background: #1e1e1e;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #00e676, #00c853);
+      box-shadow: 0 0 12px #00e676;
+      border-radius: 50px;
+      transition: width 1.2s ease-in-out;
+      position: relative;
+    }
+
+    .bar-text {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8rem;
+      color: #fff;
+      font-weight: bold;
+      text-shadow: 0 0 3px #000;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <h3>💰 Million Dollar Baby</h3>
+  <div class="money" id="raised">$0</div>
+
+  <div class="bar-container">
+    <div class="bar-fill" id="progress-bar">
+      <div class="bar-text" id="progress-text">0%</div>
+    </div>
+  </div>
+
+  <div class="tagline">One goal. One number. One vibe.</div>
+  <footer>© 2025 Million Dollar Baby</footer>
+
+  <canvas id="particles"></canvas>
+
+  <script>
+    const apiUrl = 'https://script.google.com/macros/s/AKfycbyHP4_FlboOJxrjqQ2VRRvoNTuc-4jAmg4rqLbTi1IzeuGPmY2DIi2cYWzKS9E9J3ASUQ/exec';
+
+    function animateNumber(el, target) {
+      let current = 0;
+      const duration = 1000;
+      const stepTime = 15;
+      const steps = duration / stepTime;
+      const increment = target / steps;
+
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+        }
+        el.textContent = `$` + Math.floor(current).toLocaleString();
+      }, stepTime);
+    }
+
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => {
+        const target = parseFloat(data.target);
+        const raised = parseFloat(data.raised);
+        const percent = Math.min(100, (raised / target) * 100).toFixed(1);
+
+        animateNumber(document.getElementById('raised'), raised);
+        document.getElementById('progress-bar').style.width = percent + '%';
+        document.getElementById('progress-text').textContent = percent + '%';
+      });
+  </script>
+
+  <!-- Particle background -->
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 60; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5,
+        a: 0.2 + Math.random() * 0.3
+      });
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+        ctx.fillStyle = `rgba(0, 230, 118, ${p.a})`;
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  </script>
+</body>
+</html>
