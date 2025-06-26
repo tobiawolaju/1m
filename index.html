@@ -75,6 +75,15 @@
       font-weight: bold;
       text-shadow: 0 0 3px #000;
     }
+    
+    .blur {
+  filter: blur(4px);
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+
+
 
     footer {
       position: absolute;
@@ -97,7 +106,8 @@
 
  <h3 id="date-range"></h3>
 
-  <div class="money" id="raised">$0</div>
+  <div class="money blur" id="raised">$0</div>
+
 
   <div class="bar-container">
     <div class="bar-fill" id="progress-bar">
@@ -216,6 +226,13 @@
 
   const randomVerse = verses[Math.floor(Math.random() * verses.length)];
   document.getElementById("bible-verse").textContent = randomVerse;
+</script>
+
+<script>
+  const balanceEl = document.getElementById("raised");
+  balanceEl.addEventListener("click", () => {
+    balanceEl.classList.toggle("blur");
+  });
 </script>
 
 
