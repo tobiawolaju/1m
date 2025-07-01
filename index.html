@@ -39,8 +39,15 @@
       font-size: 1rem;
       color: #aaa;
       letter-spacing: 1px;
-      max-width:60vw;
+      max-width: 60vw;
       text-align: center;
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .fade-out {
+      opacity: 0;
     }
 
     .bar-container {
@@ -94,7 +101,7 @@
 </head>
 <body>
 
- <h3 id="date-range"></h3>
+  <h3 id="date-range"></h3>
 
   <div class="money" id="raised">$0</div>
 
@@ -104,8 +111,8 @@
     </div>
   </div>
 
- <div class="tagline" id="bible-verse"></div>
- <footer>© 2025 Million Dollar Baby </footer>
+  <div class="tagline" id="bible-verse"></div>
+  <footer>© 2025 Million Dollar Baby </footer>
 
   <canvas id="particles"></canvas>
 
@@ -188,31 +195,43 @@
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const currentDate = now.toLocaleDateString(undefined, options);
-
     document.getElementById('date-range').textContent = `${startDate} - ${currentDate}`;
   </script>
 
   <script>
-    const verses = [
-      "1 Timothy 6:10 — 'For the love of money is a root of all kinds of evil.'",
-      "Proverbs 13:11 — 'Dishonest money dwindles away, but whoever gathers money little by little makes it grow.'",
-      "Luke 12:15 — 'Watch out! Be on your guard against all kinds of greed; life does not consist in an abundance of possessions.'",
-      "Ecclesiastes 5:10 — 'Whoever loves money never has enough; whoever loves wealth is never satisfied with their income.'",
-      "Hebrews 13:5 — 'Keep your lives free from the love of money and be content with what you have.'",
-      "Proverbs 22:7 — 'The rich rule over the poor, and the borrower is slave to the lender.'",
-      "Matthew 6:24 — 'You cannot serve both God and money.'",
-      "Matthew 6:21 — 'For where your treasure is, there your heart will be also.'",
-      "Proverbs 3:9 — 'Honor the Lord with your wealth, with the firstfruits of all your crops.'",
-      "Malachi 3:10 — 'Bring the whole tithe into the storehouse... Test me in this,' says the Lord Almighty, 'and see if I will not throw open the floodgates of heaven.'",
-      "Acts 20:35 — 'It is more blessed to give than to receive.'",
-      "Proverbs 11:28 — 'Those who trust in their riches will fall, but the righteous will thrive like a green leaf.'",
-      "2 Corinthians 9:7 — 'God loves a cheerful giver.'",
-      "Proverbs 28:20 — 'A faithful person will be richly blessed, but one eager to get rich will not go unpunished.'",
-      "Psalm 37:21 — 'The wicked borrow and do not repay, but the righteous give generously.'"
+    const hacks = [
+      "Automate your savings — set it and forget it.",
+      "Invest early to benefit from compound interest.",
+      "Track every dollar — awareness drives discipline.",
+      "Live below your means, not at your income level.",
+      "High income doesn’t mean wealth — assets do.",
+      "Avoid lifestyle inflation, upgrade investments instead.",
+      "Credit card points only work if you never pay interest.",
+      "Emergency funds prevent financial collapse.",
+      "Make money while you sleep — invest in cashflow.",
+      "Budgeting is telling your money where to go.",
+      "Pay yourself first — before you pay the bills.",
+      "Use the 50/30/20 rule — needs/wants/savings.",
+      "Wealth is built in silence, not flexed on socials.",
+      "Money saved on small things adds up big over time.",
+      "Learn to negotiate — salaries, deals, bills.",
+      "Avoid get-rich-quick schemes — build slow, smart."
     ];
 
-    const randomVerse = verses[Math.floor(Math.random() * verses.length)];
-    document.getElementById("bible-verse").textContent = randomVerse;
+    let currentIndex = Math.floor(Math.random() * hacks.length);
+    const verseEl = document.getElementById("bible-verse");
+
+    function updateVerse() {
+      verseEl.classList.add('fade-out');
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % hacks.length;
+        verseEl.textContent = hacks[currentIndex];
+        verseEl.classList.remove('fade-out');
+      }, 500);
+    }
+
+    verseEl.textContent = hacks[currentIndex];
+    verseEl.addEventListener('click', updateVerse);
   </script>
 
 </body>
