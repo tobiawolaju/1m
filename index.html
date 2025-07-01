@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Sets the theme color for mobile and desktop Chrome tabs -->
-<meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000" />
   <title>Million Dollar Baby</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -25,14 +24,14 @@
     h1 {
       font-size: 3rem;
       margin-bottom: 0.5rem;
-      text-shadow: 0 0 10px #00c853;
+      text-shadow: 0 0 10px #AB9FF1;
     }
 
     .money {
       font-size: 4rem;
       font-weight: bold;
-      color: #00e676;
-      text-shadow: 0 0 20px #00e676aa;
+      color: #AB9FF1;
+      text-shadow: 0 0 20px #AB9FF1AA;
     }
 
     .tagline {
@@ -58,8 +57,8 @@
     .bar-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(to right, #00e676, #00c853);
-      box-shadow: 0 0 12px #00e676;
+      background: linear-gradient(to right, #AB9FF1, #8F7BE6);
+      box-shadow: 0 0 12px #AB9FF1;
       border-radius: 50px;
       transition: width 1.2s ease-in-out;
       position: relative;
@@ -75,15 +74,6 @@
       font-weight: bold;
       text-shadow: 0 0 3px #000;
     }
-    
-    .blur {
-  filter: blur(8px);
-  cursor: pointer;
-  transition: filter 0.3s ease;
-}
-
-
-
 
     footer {
       position: absolute;
@@ -106,8 +96,7 @@
 
  <h3 id="date-range"></h3>
 
-  <div class="money blur" id="raised">$0</div>
-
+  <div class="money" id="raised">$0</div>
 
   <div class="bar-container">
     <div class="bar-fill" id="progress-bar">
@@ -153,7 +142,6 @@
       });
   </script>
 
-  <!-- Particle background -->
   <script>
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
@@ -182,7 +170,7 @@
       for (let p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
-        ctx.fillStyle = `rgba(0, 230, 118, ${p.a})`;
+        ctx.fillStyle = `rgba(171, 159, 241, ${p.a})`;
         ctx.fill();
         p.x += p.dx;
         p.y += p.dy;
@@ -196,45 +184,37 @@
   </script>
 
   <script>
-  const startDate = "July 1st";
-  const now = new Date();
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  const currentDate = now.toLocaleDateString(undefined, options);
+    const startDate = "July 1st";
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const currentDate = now.toLocaleDateString(undefined, options);
 
-  document.getElementById('date-range').textContent = `${startDate} - ${currentDate}`;
-</script>
+    document.getElementById('date-range').textContent = `${startDate} - ${currentDate}`;
+  </script>
 
-<script>
-  const verses = [
-  "1 Timothy 6:10 — 'For the love of money is a root of all kinds of evil.'",
-  "Proverbs 13:11 — 'Dishonest money dwindles away, but whoever gathers money little by little makes it grow.'",
-  "Luke 12:15 — 'Watch out! Be on your guard against all kinds of greed; life does not consist in an abundance of possessions.'",
-  "Ecclesiastes 5:10 — 'Whoever loves money never has enough; whoever loves wealth is never satisfied with their income.'",
-  "Hebrews 13:5 — 'Keep your lives free from the love of money and be content with what you have.'",
-  "Proverbs 22:7 — 'The rich rule over the poor, and the borrower is slave to the lender.'",
-  "Matthew 6:24 — 'You cannot serve both God and money.'",
-  "Matthew 6:21 — 'For where your treasure is, there your heart will be also.'",
-  "Proverbs 3:9 — 'Honor the Lord with your wealth, with the firstfruits of all your crops.'",
-  "Malachi 3:10 — 'Bring the whole tithe into the storehouse... Test me in this,' says the Lord Almighty, 'and see if I will not throw open the floodgates of heaven.'",
-  "Acts 20:35 — 'It is more blessed to give than to receive.'",
-  "Proverbs 11:28 — 'Those who trust in their riches will fall, but the righteous will thrive like a green leaf.'",
-  "2 Corinthians 9:7 — 'God loves a cheerful giver.'",
-  "Proverbs 28:20 — 'A faithful person will be richly blessed, but one eager to get rich will not go unpunished.'",
-  "Psalm 37:21 — 'The wicked borrow and do not repay, but the righteous give generously.'"
-];
+  <script>
+    const verses = [
+      "1 Timothy 6:10 — 'For the love of money is a root of all kinds of evil.'",
+      "Proverbs 13:11 — 'Dishonest money dwindles away, but whoever gathers money little by little makes it grow.'",
+      "Luke 12:15 — 'Watch out! Be on your guard against all kinds of greed; life does not consist in an abundance of possessions.'",
+      "Ecclesiastes 5:10 — 'Whoever loves money never has enough; whoever loves wealth is never satisfied with their income.'",
+      "Hebrews 13:5 — 'Keep your lives free from the love of money and be content with what you have.'",
+      "Proverbs 22:7 — 'The rich rule over the poor, and the borrower is slave to the lender.'",
+      "Matthew 6:24 — 'You cannot serve both God and money.'",
+      "Matthew 6:21 — 'For where your treasure is, there your heart will be also.'",
+      "Proverbs 3:9 — 'Honor the Lord with your wealth, with the firstfruits of all your crops.'",
+      "Malachi 3:10 — 'Bring the whole tithe into the storehouse... Test me in this,' says the Lord Almighty, 'and see if I will not throw open the floodgates of heaven.'",
+      "Acts 20:35 — 'It is more blessed to give than to receive.'",
+      "Proverbs 11:28 — 'Those who trust in their riches will fall, but the righteous will thrive like a green leaf.'",
+      "2 Corinthians 9:7 — 'God loves a cheerful giver.'",
+      "Proverbs 28:20 — 'A faithful person will be richly blessed, but one eager to get rich will not go unpunished.'",
+      "Psalm 37:21 — 'The wicked borrow and do not repay, but the righteous give generously.'"
+    ];
 
-
-  const randomVerse = verses[Math.floor(Math.random() * verses.length)];
-  document.getElementById("bible-verse").textContent = randomVerse;
-</script>
-
-<script>
-  const balanceEl = document.getElementById("raised");
-  balanceEl.addEventListener("click", () => {
-    balanceEl.classList.toggle("blur");
-  });
-</script>
-
+    const randomVerse = verses[Math.floor(Math.random() * verses.length)];
+    document.getElementById("bible-verse").textContent = randomVerse;
+  </script>
 
 </body>
 </html>
+
